@@ -1,3 +1,9 @@
+---
+layout: post 1
+title: Creating posts
+---
+
+
 ```python
 # Loading in the packages
 import sqlite3
