@@ -29,10 +29,6 @@ temperatures.to_sql("temperatures", conn, if_exists = "replace", index = False)
 countries.to_sql("countries", conn, if_exists = "replace", index = False)
 ```
 
-    /opt/anaconda3/lib/python3.8/site-packages/pandas/core/generic.py:2605: UserWarning: The spaces in these column names will not be changed. In pandas versions < 0.14, spaces were converted to underscores.
-      sql.to_sql(
-
-
 
 ```python
 ## PART 2: Defining the query function and testing it
@@ -83,7 +79,6 @@ query_climate_database("India", 1980, 2020, 1)
 
 
 <div>
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
