@@ -15,10 +15,14 @@ from scrapy.http import Request
 ```
 
 ##### PART2: Implementation of the "parse" method
-#### The "parse" method assumes that I start on the main page of a movie. It would recognize the "Cast & Crew" link on the upper right, and yields a request to navigate to the page. Here is the code for this method:
+#### The "parse" method recognize the "Cast & Crew" link on the upper right, and yields a request to navigate to the page. Here is the code for this method:
 
 ```python
 def parse(self, response):
+    """
+    The "parse" method assumes that I start on the main page of a movie. This is
+    the start of the web-scraping process.
+    """
     # Getting the table where the cast link is located
     cast_boxes_contents = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV")
     # Getting the Cast & Crew tab
@@ -33,9 +37,13 @@ def parse(self, response):
 ```
 
 ##### PART3: Implementation of the "parse_full_credits" method
-#### The "parse" method assumes that I already navigated to the "Cast & Crew" page. By pinpointing the link for each actor, this method yields a request to finds the actor's URL that leads to the his or her personal page. Here is the code for this method.
+#### The "parse" method pinpoints the link for each actor, this method yields a request to finds the actor's URL that leads to the his or her personal page. Here is the code for this method.
 ```python
 def parse_full_credits(self, response):
+    """
+    The "parse_full_credits" method is called after the "parse" method. It assumes
+    that we have already reached the Cast & Crew page for our movie.
+    """
     # Extract the actors selector
     actors_selectors = response.css("table.cast_list tr")[1:]
 
@@ -47,9 +55,13 @@ def parse_full_credits(self, response):
 ```
 
 ##### PART 4: Implementation of the "parse_actor_page" method
-#### The "parse" method assumes that I already navigated to the actor's personal page, and recognizes the movies and shows that the actor involved in. It creates a dictionary of two elements: the actor's name, and the movies' or shows' names. It also yields the dictionary, which is convenient for me to do further analysis. Here is the code for this section.
+#### The "parse" method recognizes the movies and shows that the actor involved in. It creates a dictionary of two elements: the actor's name, and the movies' or shows' names. It also yields the dictionary, which is convenient for me to do further analysis. Here is the code for this section.
 ```python
 def parse_actor_page(self, response):
+    """
+    Finally, The "parse_actor_page" method is called. Its assumption is thta we are
+    on the actor's personal page. This is the method whereby we output the data we need.
+    """
     # Retrieving information about the actor and his or her movies
     movies_selector = response.css("div.filmo-category-section b")
     actor_name = response.css("span.itemprop")[0].css("::text").get()
