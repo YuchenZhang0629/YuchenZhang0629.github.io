@@ -20,13 +20,13 @@ from scrapy.http import Request
 ```python
 def parse(self, response):
     """
-    The "parse" method assumes that I start on the main page of a movie. This is
-    the start of the web-scraping process.
+    The "parse" method assumes that I start on the main page of a movie. This 
+    is the start of the web-scraping process.
     """
     # Getting the table where the cast link is located
-    cast_boxes_contents = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV")
+    content = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV")
     # Getting the Cast & Crew tab
-    cast_tab = cast_boxes_contents.css("li.ipc-inline-list__item a")[0]
+    cast_tab = content.css("li.ipc-inline-list__item a")[0]
     # Getting the suffix that leads to next page, which is the cast list
     next_page_cast = cast_tab.attrib["href"]
         
@@ -41,8 +41,8 @@ def parse(self, response):
 ```python
 def parse_full_credits(self, response):
     """
-    The "parse_full_credits" method is called after the "parse" method. It assumes
-    that we have already reached the Cast & Crew page for our movie.
+    The "parse_full_credits" method is called after the "parse" method. It
+    assumes that we have already reached the Cast & Crew page for our movie.
     """
     # Extract the actors selector
     actors_selectors = response.css("table.cast_list tr")[1:]
@@ -59,8 +59,9 @@ def parse_full_credits(self, response):
 ```python
 def parse_actor_page(self, response):
     """
-    Finally, The "parse_actor_page" method is called. Its assumption is thta we are
-    on the actor's personal page. This is the method whereby we output the data we need.
+    Finally, The "parse_actor_page" method is called. Its assumption is that
+    we are on the actor's personal page. This is the method whereby we output
+    the data we need.
     """
     # Retrieving information about the actor and his or her movies
     movies_selector = response.css("div.filmo-category-section b")
@@ -84,11 +85,11 @@ def parse_actor_page(self, response):
 ```python
 import pandas as pd
 Actors_Movies = pd.read_csv("output.csv")
-Actors_Movies_aggregate = Actors_Movies.groupby("movie").aggregate(len)
-Actors_Movies_aggregate.index.name = 'Movie'
-Actors_Movies_aggregate.reset_index(inplace=True)
-Actors_Movies_aggregate = Actors_Movies_aggregate.sort_values("actor", ascending = False)
-Actors_Movies_aggregate.head(30)
+Aggregate = Actors_Movies.groupby("movie").aggregate(len)
+Aggregate.index.name = 'Movie'
+Aggregate.reset_index(inplace=True)
+Aggregate = Aggregate.sort_values("actor", ascending = False)
+Aggregate.head(30)
 ```
 
 <div>
@@ -288,9 +289,9 @@ class QuoteSpider(scrapy.Spider):
     
     def parse(self, response):
         # Getting the table where the cast link is located
-        cast_boxes_contents = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV").css("li.ipc-inline-list__item a")[0]
+        content = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV").css("li.ipc-inline-list__item a")[0]
         # Getting the suffix that leads to next page, which is the cast list
-        next_page_cast = cast_boxes_contents.attrib["href"]
+        next_page_cast = content.attrib["href"]
         
         # Go to the next page
         if next_page_cast:
