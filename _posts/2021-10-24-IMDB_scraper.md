@@ -19,52 +19,52 @@ from scrapy.http import Request
 
 ```python
 def parse(self, response):
-        # Getting the table where the cast link is located
-        cast_boxes_contents = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV").css("li.ipc-inline-list__item a")[0]
-        # Getting the suffix that leads to next page, which is the cast list
-        next_page_cast = cast_boxes_contents.attrib["href"]
+    # Getting the table where the cast link is located
+    cast_boxes_contents = response.css("div.SubNav__SubNavContent-sc-11106ua-3.cKmYsV")
+    # Getting the Cast & Crew tab
+    cast_tab = cast_boxes_contents.css("li.ipc-inline-list__item a")[0]
+    # Getting the suffix that leads to next page, which is the cast list
+    next_page_cast = cast_tab.attrib["href"]
         
-        # Go to the next page
-        if next_page_cast:
-            cast_link = response.urljoin(next_page_cast)
-
-            yield Request(cast_link, callback = self.parse_full_credits)
+    # Go to the next page
+    if next_page_cast:
+        cast_link = response.urljoin(next_page_cast)
+        yield Request(cast_link, callback = self.parse_full_credits)
 ```
 
 ##### PART3: Implementation of the "parse_full_credits" method
 #### The "parse" method assumes that I already navigated to the "Cast & Crew" page. By pinpointing the link for each actor, this method yields a request to finds the actor's URL that leads to the his or her personal page. Here is the code for this method.
 ```python
 def parse_full_credits(self, response):
-        # Extract the actors selector
-        actors_selectors = response.css("table.cast_list tr")[1:]
+    # Extract the actors selector
+    actors_selectors = response.css("table.cast_list tr")[1:]
 
-        for actors in actors_selectors:
-            # Check if this selector is indeed regarding an actor or just another element of the data frame
-            if actors.css("a")[1]:
-                actor_page_link = response.urljoin(actors.css("a")[1].css("a").attrib["href"])
-
-                yield Request(actor_page_link, callback = self.parse_actor_page)
+    for actors in actors_selectors:
+        # Check if it is successfully called
+        if actors.css("a")[1]:
+            actor_page_link = response.urljoin(actors.css("a")[1].css("a").attrib["href"])
+            yield Request(actor_page_link, callback = self.parse_actor_page)
 ```
 
 ##### PART 4: Implementation of the "parse_actor_page" method
 #### The "parse" method assumes that I already navigated to the actor's personal page, and recognizes the movies and shows that the actor involved in. It creates a dictionary of two elements: the actor's name, and the movies' or shows' names. It also yields the dictionary, which is convenient for me to do further analysis. Here is the code for this section.
 ```python
 def parse_actor_page(self, response):
-        # Retrieving information about the actor and his or her movies on the actors page
-        movies_selector = response.css("div.filmo-category-section b")
-        actor_name = response.css("span.itemprop")[0].css("::text").get()
+    # Retrieving information about the actor and his or her movies
+    movies_selector = response.css("div.filmo-category-section b")
+    actor_name = response.css("span.itemprop")[0].css("::text").get()
 
-        for movie_show in movies_selector:
-            # Extracting the names and link that
-            response.css("h1.header span").css("::text").get()
-            movie_show_name = movie_show.css("::text").get()
+    for movie_show in movies_selector:
+        # Extracting the names and link that
+        response.css("h1.header span").css("::text").get()
+        movie_show_name = movie_show.css("::text").get()
 
-            if movie_show_name:
-                # Writing the
-                yield {
-                    "actor": actor_name,
-                    "movie": movie_show_name
-                }
+        if movie_show_name:
+            # Writing the
+            yield {
+                "actor": actor_name,
+                "movie": movie_show_name
+            }
 ```
 
 ##### PART 5: Data cleaning
