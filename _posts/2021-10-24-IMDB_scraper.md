@@ -3,6 +3,7 @@ layout: post
 title: Blog2 - IMDB Scraping
 ---
 
+##### Introduction
 #### In this project, I am going to implement a cool and effective web scraper that allows me to find the other movies that share the most actors with my own favorite. Here is how I set up the project, allow me to expand on it section by section.
 
 
@@ -30,7 +31,7 @@ def parse(self, response):
 ```
 
 ##### PART3: Implementation of the "parse_full_credits" method
-##### The "parse" method assumes that I already navigated to the "Cast & Crew" page. By pinpointing the link for each actor, this method yields a request to finds the actor's URL that leads to the his or her personal page. Here is the code for this method.
+#### The "parse" method assumes that I already navigated to the "Cast & Crew" page. By pinpointing the link for each actor, this method yields a request to finds the actor's URL that leads to the his or her personal page. Here is the code for this method.
 ```python
 def parse_full_credits(self, response):
         # Extract the actors selector
@@ -45,7 +46,7 @@ def parse_full_credits(self, response):
 ```
 
 ##### PART 4: Implementation of the "parse_actor_page" method
-##### The "parse" method assumes that I already navigated to the actor's personal page, and recognizes the movies and shows that the actor involved in. It creates a dictionary of two elements: the actor's name, and the movies' or shows' names. It also yields the dictionary, which is convenient for me to do further analysis. Here is the code for this section.
+#### The "parse" method assumes that I already navigated to the actor's personal page, and recognizes the movies and shows that the actor involved in. It creates a dictionary of two elements: the actor's name, and the movies' or shows' names. It also yields the dictionary, which is convenient for me to do further analysis. Here is the code for this section.
 ```python
 def parse_actor_page(self, response):
         # Retrieving information about the actor and his or her movies on the actors page
@@ -66,7 +67,7 @@ def parse_actor_page(self, response):
 ```
 
 ##### PART 5: Data cleaning
-##### After I obtained my output, I read the csv file with Jupyter Notebook and did a few data manipulation to find the number of shared actors for each of the movies with my favorite. Here are the results.
+#### After I obtained my output, I read the csv file with Jupyter Notebook and did a few data manipulation to find the number of shared actors for each of the movies with my favorite. Here are the results.
 ```python
 import pandas as pd
 Actors_Movies = pd.read_csv("output.csv")
@@ -255,10 +256,10 @@ Actors_Movies_aggregate.head(30)
 </div>
 
 ##### PART6: Recommendation
-##### This scraper is really helpful if we want to find the relevant movies based on our favorite actors or actresses. Apart from that, it is very possible to scrape with the release date, countries, and even genre as well. I will be interested in seeing how to implement the techniques I learned into achieving those as well.
+#### This scraper is really helpful if we want to find the relevant movies based on our favorite actors or actresses. Apart from that, it is very possible to scrape with the release date, countries, and even genre as well. I will be interested in seeing how to implement the techniques I learned into achieving those as well.
 
 ##### PART7: Conclusion and appendment
-##### In this project, I got familiar with some of the most useful web-scraping techniques. Another valuable thing I achieved is that by using developer tools, I got first-hand experience with the most fundamental data structures in creating a website, which definitely sheds light into my potential future endeavors. That's so much for my project, see you next time!
+#### In this project, I got familiar with some of the most useful web-scraping techniques. Another valuable thing I achieved is that by using developer tools, I got first-hand experience with the most fundamental data structures in creating a website, which definitely sheds light into my potential future endeavors. That's so much for my project, see you next time!
 
 ##### Here is the complete code fot the scraper:
 ```python
