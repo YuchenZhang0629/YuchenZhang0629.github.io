@@ -13,10 +13,8 @@ from scrapy.spiders import Spider
 from scrapy.http import Request
 ```
 
-
-
 ##### PART2: Implementation of the "parse" method
-##### The "parse" method assumes that I start on the main page of a movie. It would recognize the "Cast & Crew" link on the upper right, and yields a request to navigate to the page. Here is the code for this method:
+#### The "parse" method assumes that I start on the main page of a movie. It would recognize the "Cast & Crew" link on the upper right, and yields a request to navigate to the page. Here is the code for this method:
 ```python
 def parse(self, response):
         # Getting the table where the cast link is located
