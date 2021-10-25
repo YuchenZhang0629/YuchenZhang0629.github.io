@@ -3,7 +3,7 @@ layout: post
 title: Blog2 - IMDB Scraping
 ---
 
-## In this project, I am going to implement a cool and effective web scraper that allows me to find the other movies that share the most actors with my own favorite. Here is how I set up the project, allow me to expand on it section by section.
+#### In this project, I am going to implement a cool and effective web scraper that allows me to find the other movies that share the most actors with my own favorite. Here is how I set up the project, allow me to expand on it section by section.
 
 
 ##### PART1: Loading the packages
@@ -12,6 +12,8 @@ import scrapy
 from scrapy.spiders import Spider
 from scrapy.http import Request
 ```
+
+
 
 ##### PART2: Implementation of the "parse" method
 ##### The "parse" method assumes that I start on the main page of a movie. It would recognize the "Cast & Crew" link on the upper right, and yields a request to navigate to the page. Here is the code for this method:
