@@ -4,7 +4,7 @@ title: Blog6 - Natural Language Processing
 ---
 
 ##### Introduction
-#### In this blog post, I am going to show how to use Tensorflow to determine whether a piece of news is fake or not. We achieve this by looking at either the title, the text of the information itself, or both. But first, let's load the required packages.
+#### In this blog post, I am going to show how to use Tensorflow to determine whether a piece of news is fake or not. We achieve this by looking at either the title, the text of the information itself, or both. With the assistance of enbedding, standardization, and our familiar techniques like max poooling, dense, and droo out, we can achieve this goal efficiently. But first, let's load the required packages.
 ```python
 import pandas as pd
 from sklearn.feature_extraction import text
