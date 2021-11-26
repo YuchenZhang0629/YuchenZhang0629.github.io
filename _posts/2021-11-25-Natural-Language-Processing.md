@@ -38,6 +38,12 @@ dataset.drop("Unnamed: 0", inplace = True, axis=1)
 # Here we are excluding the stopwords
 stop = text.ENGLISH_STOP_WORDS
 
+"""
+For each column of the dataset, we exclude the non-informative words. 
+Then, we create a tensor that have the input and output sections. We
+then divide it into train and test according to the specifieed p, 
+which is in this case, 0.2
+"""
 def make_dataset(data, p):
     ncol = data.shape[1]
     for i in range(ncol-1):
@@ -97,6 +103,11 @@ title_input = keras.Input(
 )
 
 # layers for processing the titles
+"""
+We first create a pipeline for the title using embedding and our other
+familiar layers. The output dense layer should match the classes in our
+output, whch is 2.
+"""
 title_features = vectorize_layer(title_input)
 title_features = layers.Embedding(3000, 3, name = "embedding")(title_features)
 title_features = layers.Dropout(0.2)(title_features)
@@ -107,10 +118,7 @@ title_features = layers.Dense(32, activation='relu')(title_features)
 main = layers.concatenate([title_features], axis = 1)
 main = layers.Dense(32, activation='relu')(main)
 output = layers.Dense(2, name = "fake")(main)
-```
 
-
-```python
 model1 = keras.Model(
     inputs = [title_input],
     outputs = output
@@ -204,6 +212,11 @@ text_input = keras.Input(
     dtype = "string"
 )
 
+"""
+In order for us to take in both title and text in the input, we construct
+the two vectorizations as follows. Since the adapt method is not directly
+callable, we need to define another function to store it.
+"""
 def vectorization(train,input):
     vectorize_layer.adapt(train.map(lambda x, y: x[input]))
     return vectorize_layer
