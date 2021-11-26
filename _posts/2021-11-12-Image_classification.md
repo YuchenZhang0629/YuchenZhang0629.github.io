@@ -478,7 +478,7 @@ axs[1,1].legend()
 plt.tight_layout()
 ```
 #### Performance wise, all the four test models achieved a very high test accuracy. However, it does seem that the first and fourth model are more consistent. 
-![cats_dogs.png](/images/cats_dogs.png)
+![test_models.png](/images/test_models.png)
 
 
 ##### Part 7: Conclusion
