@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Blog5 - Image Classification
+title: Blog6 - Natural Language Processing
 ---
 
 ##### Introduction
