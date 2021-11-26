@@ -328,3 +328,4 @@ fig = px.scatter(embedding_df,
 fig.show()
 fig.write_html("test.html")
 ```
+{% include test.html %}
