@@ -35,6 +35,15 @@ dataset.drop("Unnamed: 0", inplace = True, axis=1)
 #### In the second part, we do some brief data cleaning. In order to speed up the training process, we need to delete the uninformative words like "the", "and", and "a", etc. In addition, we remove the syntax symbols and leave only the text for Tensorflow to interpret. 
 #### We create a dictionary with two parts: an input involving the title and text, and the output part which indexes whether the news is fake or not.
 ```python
+"""
+Here we see what the baseline performance of the dataset. The proportion
+of fake news among all is approximately 52.3 percent
+"""
+sum(dataset["fake"])/len(dataset["fake"])
+```
+    0.522963160942581
+
+```python
 # Here we are excluding the stopwords
 stop = text.ENGLISH_STOP_WORDS
 
