@@ -10,7 +10,7 @@ public class StepVO {
     private String path;
 
     // hive
-    private Map<String,String> hiveparam;
+    private Map<String,String> hiveParam;
 
 
     // spark
@@ -23,6 +23,24 @@ public class StepVO {
     private String mode;
     private String source;
     private String destination;
+
+
+    // script
+    private String param;
+
+
+    // dataloader
+    private String sourceDatasource;
+    private String destDatasource;
+    private String sourcePath;
+    private List<String> sourceTables;
+    private List<String> destTables;
+    private List<String> sourceCSV;
+
+
+    // custom
+    private String function;
+
 
     public String getOrder() {
         return order;
@@ -56,12 +74,12 @@ public class StepVO {
         this.path = path;
     }
 
-    public Map<String, String> getHiveparam() {
-        return hiveparam;
+    public Map<String, String> getHiveParam() {
+        return hiveParam;
     }
 
-    public void setHiveparam(Map<String, String> hiveparam) {
-        this.hiveparam = hiveparam;
+    public void setHiveParam(Map<String, String> hiveParam) {
+        this.hiveParam = hiveParam;
     }
 
     public String getMaster() {
@@ -175,20 +193,4 @@ public class StepVO {
     public void setFunction(String function) {
         this.function = function;
     }
-
-    // script
-    private String param;
-
-
-    // dataloader
-    private String sourceDatasource;
-    private String destDatasource;
-    private String sourcePath;
-    private List<String> sourceTables;
-    private List<String> destTables;
-    private List<String> sourceCSV;
-
-
-    // custom
-    private String function;
 }

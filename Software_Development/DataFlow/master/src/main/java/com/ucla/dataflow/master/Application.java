@@ -13,10 +13,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 @SpringBootApplication
-
 public class Application {
     @Value("${jsonConfigPath}")
     private String jsonConfigPath;
+
     private static final Logger appLogger = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

@@ -6,7 +6,7 @@ import java.util.List;
 public class ConfigVO {
     private Integer projectId;
     private String projectName;
-    private List<DataSource> dataSource;
+    private List<DataSource> datasources;
     private List<TaskVO> tasks;
 
     public Integer getProjectId() {
@@ -25,12 +25,12 @@ public class ConfigVO {
         this.projectName = projectName;
     }
 
-    public List<DataSource> getDataSource() {
-        return dataSource;
+    public List<DataSource> getDatasources() {
+        return datasources;
     }
 
-    public void setDataSource(List<DataSource> dataSource) {
-        this.dataSource = dataSource;
+    public void setDatasources(List<DataSource> datasources) {
+        this.datasources = datasources;
     }
 
     public List<TaskVO> getTasks() {
