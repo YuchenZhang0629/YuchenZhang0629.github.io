@@ -1,0 +1,117 @@
+{
+  "projectId": 1,
+  "projectName": "projectA",
+  "datasources":[
+    {
+      "name":"source",
+      "url":"sss",
+      "username":"sss",
+      "password":"sss",
+      "driver":"sss"
+    },{
+      "name":"dest",
+      "url":"qqq",
+      "username":"qqq",
+      "password":"qqq",
+      "driver":"qqq"
+    }
+  ],
+  "tasks":[
+    {
+      "taskId":1,
+      "taskName":"task1",
+      "cron":"0 0 0 * * ?",
+      "steps":[
+        {
+          "order":1,
+          "stepName":"step1",
+          "type":"hive",
+          "path":"/dev/yuchenz/test.hql",
+          "hiveParam":{
+            "var1":2012
+          }
+        },{
+          "order":2,
+          "stepName":"step2",
+          "type": "spark",
+          "path": "/dev/yuchenz/SparkExample.jar",
+          "master": "local[*]",
+          "deployMode": "client",
+          "className": "com.yuchenz.test.SparkHiveExample"
+        }
+      ]
+    },{
+      "taskId":2,
+      "taskName":"task2",
+      "cron":"0 0 0 0 * ?",
+      "steps":[
+        {
+          "order":1,
+          "stepName":"step1",
+          "type":"hive",
+          "path":"/dev/yuchenz/test.hql"
+        },{
+          "order":1,
+          "stepName":"step2",
+          "type":"hive",
+          "path":"/dev/yuchenz/test2.hql"
+        },{
+          "order":2,
+          "stepName":"step3",
+          "type":"spark",
+          "path":"/dev/yuchenz/test.jar"
+        },{
+          "order":3,
+          "stepName":"step4",
+          "type":"hdfs",
+          "mode":"copy2local",
+          "source":"/hive/warehouse/data.csv",
+          "destination":"/dev/yuchenz"
+        },{
+          "order":4,
+          "stepName":"step5",
+          "type":"script",
+          "mode":"python3",
+          "path":"/dev/yuchenz/test.jar",
+          "param":"2022-05-06"
+        },{
+          "order":5,
+          "stepName":"step6",
+          "type":"dataloader",
+          "mode":"hive",
+          "sourceDatasource":"source",
+          "destDatasource":"dest",
+          "sourceTables":[
+            "test.data_final"
+          ],
+          "destTables":[
+            "mysqlTest.data_final",
+            "mysqlTest.b"
+          ]
+        },{
+          "order":6,
+          "stepName":"step7",
+          "type":"dataloader",
+          "mode":"csv",
+          "sourcePath":"/dev/yuchenz",
+          "destDatasource":"dest",
+          "sourceCSV":[
+            "data_final.csv",
+            "b.csv"
+          ],
+          "destTables":[
+            "mysqlTest.data_final",
+            "mysqlTest.b"
+          ]
+        },{
+          "order":7,
+          "stepName":"step8",
+          "type":"custom",
+          "path":"/dev/yuchenz/test.jar",
+          "className":"/dev/yuchenz",
+          "function":"Hello"
+        }
+      ]
+    }
+  ]
+}
