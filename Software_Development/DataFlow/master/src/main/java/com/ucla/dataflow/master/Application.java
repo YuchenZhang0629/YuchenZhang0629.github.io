@@ -23,7 +23,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-
     @PostConstruct
     public void run() throws FileNotFoundException {
         Gson gson = new Gson();
