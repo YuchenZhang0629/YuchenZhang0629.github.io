@@ -72,7 +72,7 @@
           "stepName":"step5",
           "type":"script",
           "mode":"python3",
-          "path":"/dev/yuchenz/test.jar",
+          "path":"/dev/yuchenz/test.py",
           "param":"2022-05-06"
         },{
           "order":5,
