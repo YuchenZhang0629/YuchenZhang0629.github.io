@@ -27,8 +27,8 @@
           "stepName":"step1",
           "type":"hive",
           "path":"/dev/yuchenz/test.hql",
-          "hiveParam":{
-            "var1":2012
+          "hiveParam": {
+            "var1":"2012"
           }
         },{
           "order":2,

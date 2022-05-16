@@ -27,7 +27,7 @@ public class Application {
     public void run() throws FileNotFoundException {
         Gson gson = new Gson();
         JsonReader reader = new JsonReader(new FileReader(jsonConfigPath));
-        ConfigVO configVO = gson.fromJson(jsonConfigPath, ConfigVO.class);
+        ConfigVO configVO = gson.fromJson(reader, ConfigVO.class);
         System.out.println(configVO.getProjectId());
     }
-} 
+}

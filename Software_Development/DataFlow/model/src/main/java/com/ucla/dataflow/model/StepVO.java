@@ -12,7 +12,6 @@ public class StepVO {
     // hive
     private Map<String,String> hiveParam;
 
-
     // spark
     private String master;
     private String deployMode;
@@ -40,7 +39,6 @@ public class StepVO {
 
     // custom
     private String function;
-
 
     public String getOrder() {
         return order;

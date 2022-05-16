@@ -9,7 +9,6 @@ public class ConfigVO {
     private List<DataSource> datasources;
     private List<TaskVO> tasks;
 
-
     public Integer getProjectId() {
         return projectId;
     }
@@ -43,10 +42,10 @@ public class ConfigVO {
     }
 
     class DataSource{
-        private String url;
-        private String userName;
-        private String passWord;
-        private String driver;
         private String name;
+        private String url;
+        private String username;
+        private String password;
+        private String driver;
     }
 }
