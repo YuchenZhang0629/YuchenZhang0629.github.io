@@ -1,6 +1,5 @@
 package com.ucla.oneflow.executor.config;
 
-
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +9,6 @@ import org.springframework.data.hadoop.hive.HiveClientFactory;
 import org.springframework.data.hadoop.hive.HiveClientFactoryBean;
 import org.springframework.data.hadoop.hive.HiveTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 
 @Configuration
 public class HiveConfig {
