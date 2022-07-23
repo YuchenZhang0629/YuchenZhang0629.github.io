@@ -3,7 +3,7 @@ package com.ucla.oneflow.common.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.ucla.oneflow.model.ConfigVO;
+import com.ucla.oneflow.model.VO.ConfigVO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

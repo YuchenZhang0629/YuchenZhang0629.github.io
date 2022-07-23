@@ -1,4 +1,4 @@
-package com.ucla.oneflow.model;
+package com.ucla.oneflow.model.VO;
 
 import java.util.List;
 
