@@ -1,4 +1,4 @@
-package com.ucla.oneflow.executor.executorjob;
+package com.ucla.oneflow.executor.job;
 
 import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;

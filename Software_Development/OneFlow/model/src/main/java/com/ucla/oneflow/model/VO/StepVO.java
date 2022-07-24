@@ -38,7 +38,8 @@ public class StepVO {
 
 
     // custom
-    private String function;
+    private String methodName;
+    private List<String> funcParamList;
 
     public String getOrder() {
         return order;
@@ -192,12 +193,20 @@ public class StepVO {
         this.sourceCSV = sourceCSV;
     }
 
-    public String getFunction() {
-        return function;
+    public String getMethodName() {
+        return methodName;
     }
 
-    public void setFunction(String function) {
-        this.function = function;
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public List<String> getFuncParamList() {
+        return funcParamList;
+    }
+
+    public void setFuncParamList(List<String> funcParamList) {
+        this.funcParamList = funcParamList;
     }
 }
 

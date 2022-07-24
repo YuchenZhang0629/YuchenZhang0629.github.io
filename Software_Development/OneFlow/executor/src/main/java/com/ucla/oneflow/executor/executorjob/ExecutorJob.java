@@ -1,7 +1,6 @@
 package com.ucla.oneflow.executor.executorjob;
 
-import com.ucla.oneflow.Application;
-import com.ucla.oneflow.executor.job.HiveJob;
+import com.ucla.oneflow.executor.job.*;
 import com.ucla.oneflow.executor.listener.OrderListener;
 import com.ucla.oneflow.model.JobDescriptor;
 import com.ucla.oneflow.model.VO.StepVO;
@@ -49,22 +48,40 @@ public class ExecutorJob implements Job {
             jobDescriptor.setName(stepVO.getStepName());
             paramMap.put("order",stepVO.getOrder());
             paramMap.put("stepName",stepVO.getStepName());
-            if (type.equals("hive")) {
+            if (type.equalsIgnoreCase("hive")) {
                 jobDescriptor.setJobClazz(HiveJob.class);
                 paramMap.put("path",stepVO.getPath());
                 paramMap.put("hiveParam", stepVO.getHiveParam());
-            } else if (type.equals("spark")) {
-                // jobDescriptor.setJobClazz(ScriptJob.class);
+            } else if (type.equalsIgnoreCase("spark")) {
+                jobDescriptor.setJobClazz(ScriptJob.class);
                 paramMap.put("path",stepVO.getPath());
                 paramMap.put("hiveParam", stepVO.getParam());
                 paramMap.put("mode", stepVO.getMode());
-            } else if (type.equals("script")) {
+            } else if (type.equalsIgnoreCase("script")) {
                 jobDescriptor.setJobClazz(SparkJob.class);
                 paramMap.put("path",stepVO.getPath());
                 paramMap.put("master", stepVO.getMaster());
                 paramMap.put("deployMode", stepVO.getDeployMode());
                 paramMap.put("className", stepVO.getClassName());
                 paramMap.put("sparkLogPath",stepVO.getSparkLogPath());
+            } else if (type.equalsIgnoreCase("HDFS")) {
+                jobDescriptor.setJobClazz(HdfsJob.class);
+                paramMap.put("mode",stepVO.getMode());
+                paramMap.put("source", stepVO.getSource());
+                paramMap.put("destination", stepVO.getDestination());
+            } else if (type.equalsIgnoreCase("function")) {
+                jobDescriptor.setJobClazz(FuncJob.class);
+                paramMap.put("path",stepVO.getPath());
+                paramMap.put("className", stepVO.getClassName());
+                paramMap.put("methodName", stepVO.getMethodName());
+                Map<String,String> funcParamMap = new HashMap<>();
+                if (stepVO.getFuncParamList() != null) {
+                    stepVO.getFuncParamList().forEach(str -> {
+                        String[] tempArr = str.split("=");
+                        funcParamMap.put(tempArr[0],tempArr[1]);
+                    });
+                    paramMap.put("funcParamList", funcParamMap);
+                }
             }
             jobDescriptor.setDataMap(paramMap);
             JobDetail jobDetail =jobDescriptor.buildJobDetail();
