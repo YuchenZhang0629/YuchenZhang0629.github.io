@@ -15,9 +15,13 @@ import org.springframework.batch.core.job.flow.JobExecutionDecider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.hadoop.hive.HiveTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
+import java.sql.Driver;
 import java.util.*;
 
 @SpringBootApplication
@@ -28,6 +32,10 @@ public class Application {
     private ConfigUtil configUtil;
     @Autowired
     private Scheduler scheduler;
+    @Autowired
+    private JdbcTemplate hiveJdbcTemplate;
+    @Autowired
+    private HiveTemplate hiveTemplate;
 
     private static final Logger appLogger = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) {
@@ -57,6 +65,7 @@ public class Application {
             paramMap.put("cron ",cron);
             paramMap.put("taskVO ",taskVO);
             paramMap.put("group",group);
+            paramMap.put("dataSourceMap",getDataSourceMap(dataSources));
             jobDescriptor.setDataMap(paramMap);
             JobDetail executorJobDetail = jobDescriptor.buildJobDetail();
 
@@ -69,5 +78,30 @@ public class Application {
                 e.printStackTrace();
             }
         });
+    }
+    public Map<String,Object> getDataSourceMap(List<ConfigVO.DataSource> dataSources){
+        Map<String,Object> dataSourceMap = new HashMap<>();
+        dataSources.forEach(dataSource -> {
+            if (dataSource.getName().equals("hive")) {
+                dataSourceMap.put("hive",hiveJdbcTemplate);
+                dataSourceMap.put("hiveTemplate",hiveTemplate);
+            } else {
+                SimpleDriverDataSource dS = new SimpleDriverDataSource();
+                Class<?> cls = null;
+                try {
+                    // Also perform some boundary checks here
+                    cls = Class.forName(dataSource.getDriver());
+                    dS.setDriverClass((Class<? extends Driver>) cls);
+                    dS.setUrl(dataSource.getUrl());
+                    dS.setUsername(dataSource.getUsername());
+                    dS.setPassword(dataSource.getPassword());
+                    JdbcTemplate jtm = new JdbcTemplate();
+                    dataSourceMap.put(dataSource.getName(),jtm);
+                } catch (Exception e) {
+                    appLogger.error("Error",e);
+                }
+            }
+        });
+        return dataSourceMap;
     }
 }
