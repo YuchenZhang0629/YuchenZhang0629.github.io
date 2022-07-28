@@ -75,6 +75,5 @@ public class OrderListener extends JobChainingJobListener {
         } else {
             appLogger.info("Waiting for other tasks to be completed");
         }
-
     }
 }
