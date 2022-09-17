@@ -59,6 +59,7 @@ public class Application {
             jobDescriptor.setGroup(group);
             jobDescriptor.setName(taskName);
             jobDescriptor.setJobClazz(ExecutorJob.class);
+            // Putting the parameters into a hashmao
             Map<String,Object> paramMap = new HashMap<>();
             paramMap.put("taskName",taskName);
             paramMap.put("taskId",taskId);
@@ -68,7 +69,7 @@ public class Application {
             paramMap.put("dataSourceMap",getDataSourceMap(dataSources));
             jobDescriptor.setDataMap(paramMap);
             JobDetail executorJobDetail = jobDescriptor.buildJobDetail();
-
+            // Building a scheduler
             Trigger jobTrigger = TriggerBuilder.newTrigger().withIdentity(taskName,group).
                     withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
 

@@ -56,6 +56,7 @@ public class JobDescriptor {
         this.jobClazz = jobClazz;
     }
 
+    // Building a job based on the job data map
     public JobDetail buildJobDetail(){
         JobDataMap jobDataMap = new JobDataMap();
         return newJob(jobClazz).

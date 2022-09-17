@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class HiveConfig {
+    // Access the hive parameters
     @Value("${hiveConnectionURL}")
     private String hiveConnectionURL;
     @Value("${userName}")
