@@ -1,0 +1,11 @@
+def fibonacci(n: int) -> int:
+    '''This is the original version of the algorithm
+    '''
+    assert n >= 0
+    fib_nums = [0, 1]
+    for i in range(2, n + 1):
+        if i % 2 == 1:
+            fib_nums[1] = fib_nums[0] + fib_nums[1]
+        else:
+            fib_nums[0] = fib_nums[0] + fib_nums[1]
+    return fib_nums[n % 2]
