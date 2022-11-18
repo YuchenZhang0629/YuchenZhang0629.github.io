@@ -12,7 +12,7 @@ import java.io.FileReader;
 
 
 @Component
-// Confiduring VO classes
+// Configuring VO classes
 public class ConfigUtil {
     @Value("${jsonConfigPath}")
     private String jsonConfigPath;

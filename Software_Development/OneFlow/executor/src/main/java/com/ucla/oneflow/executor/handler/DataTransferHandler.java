@@ -14,7 +14,6 @@ import java.util.*;
 public class DataTransferHandler implements RowCallbackHandler {
 
     private static final Logger appLogger = LoggerFactory.getLogger(DataTransferHandler.class);
-
     int cache = 10;
     private List<Map<String,Object>> rowList = new ArrayList<>();
     private JdbcTemplate destJtm;

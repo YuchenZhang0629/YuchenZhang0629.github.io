@@ -22,7 +22,7 @@ public class FuncJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        appLogger.info("Begin to run HDFS job");
+        appLogger.info("Begin to run Func job");
         JobDataMap paramMap=jobExecutionContext.getMergedJobDataMap();
         try {
             URLClassLoader child = new URLClassLoader(new URL[]{new File(paramMap.getString("path")).toURI().toURL()},
